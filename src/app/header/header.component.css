@@ -1,0 +1,43 @@
+.transparent-header {
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  margin-left: 200px;
+}
+
+.transparent-header .brand-logo {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #3E64FF;
+  text-decoration: none;
+}
+
+.transparent-header .nav-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.transparent-header .nav-wrapper ul li {
+  display: inline-block;
+  margin-left: 25px;
+}
+
+.transparent-header .nav-wrapper ul li:first-child {
+  margin-left: 50px;
+}
+
+.transparent-header .nav-wrapper ul li a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #737373;
+  text-decoration: none;
+}
+
+.transparent-header .nav-wrapper ul li a:hover {
+  color: #000;
+}
