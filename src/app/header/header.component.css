@@ -22,11 +22,11 @@
 }
 
 .custom-header .nav-wrapper ul {
-  margin-left: 20%; /* Ajuste a margem esquerda da lista de navegação */
+  margin-left: 20%; 
 }
 
 .custom-header .nav-wrapper ul li {
-  margin-left: 2px; /* Espaçamento entre os itens de navegação */
+  margin-left: 0%; 
 }
 
 .custom-header .nav-wrapper ul li a {
@@ -41,8 +41,36 @@
   color: #000;
 }
 
-/* Estilos personalizados para substituir as regras de estilo do Materialize */
+
 .custom-header nav {
   background-color: transparent !important;
   box-shadow: none !important;
+}
+
+.custom-header .search-bar {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.custom-header .search-bar input[type="text"] {
+  background-color: rgba(107, 119, 154, 0.05);
+  color: #737373;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  padding: 8px;
+  padding-left: 40px;
+  width: 300px;
+  height: 25px;
+}
+
+.custom-header .search-bar .material-icons {
+  position: absolute;
+  left: 10px;
+  color: #737373;
 }
