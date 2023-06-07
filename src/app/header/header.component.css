@@ -1,36 +1,35 @@
-.transparent-header {
-  background: transparent;
+.custom-header {
+  background-color: transparent !important;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px;
-  margin-left: 200px;
+  z-index: 100; /* Certifique-se de que o cabeçalho esteja acima de outros elementos */
 }
 
-.transparent-header .brand-logo {
+.custom-header .brand-logo {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 20px;
   color: #3E64FF;
   text-decoration: none;
+  margin-left: 10%; /* Ajuste a margem direita do logo */
 }
 
-.transparent-header .nav-wrapper {
+.custom-header .nav-wrapper {
   display: flex;
   align-items: center;
 }
 
-.transparent-header .nav-wrapper ul li {
-  display: inline-block;
-  margin-left: 25px;
+.custom-header .nav-wrapper ul {
+  margin-left: 20%; /* Ajuste a margem esquerda da lista de navegação */
 }
 
-.transparent-header .nav-wrapper ul li:first-child {
-  margin-left: 50px;
+.custom-header .nav-wrapper ul li {
+  margin-left: 2px; /* Espaçamento entre os itens de navegação */
 }
 
-.transparent-header .nav-wrapper ul li a {
+.custom-header .nav-wrapper ul li a {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 14px;
@@ -38,6 +37,12 @@
   text-decoration: none;
 }
 
-.transparent-header .nav-wrapper ul li a:hover {
+.custom-header .nav-wrapper ul li a:hover {
   color: #000;
+}
+
+/* Estilos personalizados para substituir as regras de estilo do Materialize */
+.custom-header nav {
+  background-color: transparent !important;
+  box-shadow: none !important;
 }

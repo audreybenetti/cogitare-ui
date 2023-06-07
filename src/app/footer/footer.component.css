@@ -1,0 +1,17 @@
+.page-footer {
+    background-color: transparent;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #737373;
+    padding: 20px 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .page-footer p {
+    margin: 0;
+    text-align: right;
+  }
