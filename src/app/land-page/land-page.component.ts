@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { pacientes } from '../paciente';
 
 @Component({
   selector: 'app-land-page',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./land-page.component.css']
 })
 export class LandPageComponent {
-
+  pacientes = [...pacientes];
 }

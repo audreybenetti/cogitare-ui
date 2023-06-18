@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { LandPageComponent } from './land-page/land-page.component';
+import { PatientEditComponent } from './patient-edit/patient-edit.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LandPageComponent } from './land-page/land-page.component';
     HeaderComponent,
     FooterComponent,
     PatientRegistrationComponent,
-    LandPageComponent
+    LandPageComponent,
+    PatientEditComponent
   ],
   imports: [
     BrowserModule,

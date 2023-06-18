@@ -1,14 +1,14 @@
 .container {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;
+    margin-top: 85px;
     max-width: 600px;
   }
 
-.btn {
+  .btn {
     background-color: #3e64ff;
-}
+  }
 
-label {
+  label {
     font-weight: normal;
-}
+  }

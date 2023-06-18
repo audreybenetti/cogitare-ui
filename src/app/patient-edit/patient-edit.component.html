@@ -1,0 +1,56 @@
+
+<div class="container" *ngIf="patient">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input disabled id="nome_completo" type="text" class="validate" value="{{ patient.name }}">
+          <label for="nome_completo" class="active">Nome completo</label>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input disabled id="data_nascimento" type="text" class="datepicker">
+          <label for="data_nascimento" class="active">Data de Nascimento</label>
+        </div>
+      </div>    
+  
+      <div class="row">
+        <div class="col s12">
+          <p>Gênero:</p>
+          <div class="radio-buttons">
+            <label>
+              <input disabled class="with-gap" name="genero" type="radio" value="feminino" />
+              <span>Feminino</span>
+            </label>
+            <label>
+              <input disabled class="with-gap" name="genero" type="radio" value="masculino" />
+              <span>Masculino</span>
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input disabled id="prontuario" type="text" class="validate">
+          <label for="prontuario" class="active">Prontuário</label>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input disabled id="unidade-internacao" type="text" class="validate" value="{{ patient.unit }}">
+          <label for="unidade-internacao" class="active">Unidade de Internação</label>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="scol s12">
+          <button class="btn waves-effect waves-light">Editar</button>
+          <button class="btn waves-effect waves-light" style="margin-left: 10px;">Adicionar atendimento</button>
+        </div>
+      </div>
+    </form>
+  </div>
+   
