@@ -6,13 +6,15 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+import { LandPageComponent } from './land-page/land-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PatientRegistrationComponent
+    PatientRegistrationComponent,
+    LandPageComponent
   ],
   imports: [
     BrowserModule,
