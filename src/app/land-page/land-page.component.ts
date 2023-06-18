@@ -8,4 +8,8 @@ import { pacientes } from '../paciente';
 })
 export class LandPageComponent {
   pacientes = [...pacientes];
+
+  performSearch(value: string) {
+    console.log('Pesquisando por:', value);
+  }
 }

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { LandPageComponent } from './land-page/land-page.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PatientEditComponent } from './patient-edit/patient-edit.component';
     FooterComponent,
     PatientRegistrationComponent,
     LandPageComponent,
-    PatientEditComponent
+    PatientEditComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
