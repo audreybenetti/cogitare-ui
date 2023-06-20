@@ -20,7 +20,7 @@ export class PatientRegistrationComponent implements AfterViewInit, OnInit {
   constructor(private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.paciente = new Paciente('', '', '', 0, '');
+    this.paciente = new Paciente('', '', new Date, 0, '');
   }
 
   ngAfterViewInit() {

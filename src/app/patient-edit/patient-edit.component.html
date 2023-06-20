@@ -10,7 +10,7 @@
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="data_nascimento" type="text" class="datepicker">
+          <input disabled id="data_nascimento" type="text" class="datepicker" value="{{ patient.birthday }}">
           <label for="data_nascimento" class="active">Data de Nascimento</label>
         </div>
       </div>    
@@ -20,11 +20,11 @@
           <p>Gênero:</p>
           <div class="radio-buttons">
             <label>
-              <input disabled class="with-gap" name="genero" type="radio" value="feminino" />
+              <input disabled class="with-gap" name="genero" type="radio" [checked]="patient.genre === 'Feminino'" />
               <span>Feminino</span>
             </label>
             <label>
-              <input disabled class="with-gap" name="genero" type="radio" value="masculino" />
+              <input disabled class="with-gap" name="genero" type="radio" [checked]="patient.genre === 'Masculino'" />
               <span>Masculino</span>
             </label>
           </div>
@@ -33,7 +33,7 @@
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="prontuario" type="text" class="validate">
+          <input disabled id="prontuario" type="text" class="validate" value="{{ patient.recordNumber}}">
           <label for="prontuario" class="active">Prontuário</label>
         </div>
       </div>
@@ -48,7 +48,7 @@
       <div class="row">
         <div class="scol s12">
           <button class="btn waves-effect waves-light">Editar</button>
-          <button class="btn waves-effect waves-light" style="margin-left: 10px;">Adicionar atendimento</button>
+          <button class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
         </div>
       </div>
     </form>
