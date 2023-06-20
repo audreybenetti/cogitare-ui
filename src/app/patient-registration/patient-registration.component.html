@@ -8,31 +8,40 @@
         type="text"
         name = "name" 
         class="validate"
-        [(ngModel)]="paciente.name"
+        [(ngModel)]="this.paciente.name"
         pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+        #name = "ngModel"
         required
         >
         <label for="nome_completo" class="active">Nome completo</label>
+        <div class="red-text" [hidden]="name.valid || name.untouched">
+          Por favor, informe o nome completo do paciente.
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
-        <input id="data_nascimento" type="text" class="datepicker">
+        <input id="data_nascimento" 
+        type="text" 
+        class="datepicker"
+        name ="birthday"
+        required
+        >
         <label for="data_nascimento" class="active">Data de Nascimento</label>
       </div>
     </div>    
-
+    
     <div class="row">
       <div class="col s12">
         <p>Gênero:</p>
         <div class="radio-buttons">
           <label>
-            <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="feminino" />
+            <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="Feminino" required/>
             <span>Feminino</span>
           </label>
           <label>
-            <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="masculino" />
+            <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="Masculino" required/>
             <span>Masculino</span>
           </label>
         </div>
@@ -47,9 +56,13 @@
         type="text" 
         class="validate"
         [(ngModel)]="paciente.recordNumber"
+        #recordNumber= "ngModel"
         required
         >
         <label for="prontuario" class="active">Prontuário</label>
+        <div class="red-text" [hidden]="recordNumber.valid || recordNumber.untouched">
+          Por favor, informe o número do prontuário do paciente.
+        </div>
       </div>
     </div>
 
@@ -61,10 +74,13 @@
         type="text" 
         class="validate"
         [(ngModel)]="paciente.unit"
-        pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+        #unit= "ngModel"
         required
         >
         <label for="unidade-internacao" class="active">Unidade de Internação</label>
+        <div class="red-text" [hidden]="unit.valid || unit.untouched">
+          Por favor, informe a unidade de internação do paciente.
+        </div>
       </div>
     </div>
 

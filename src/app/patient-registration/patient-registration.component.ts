@@ -11,6 +11,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./patient-registration.component.css']
 })
 export class PatientRegistrationComponent implements AfterViewInit, OnInit {
+  @ViewChild('form') form!: NgForm;
+
   pacientes: Paciente[] = [];
   paciente!: Paciente;
   modoEdicao = false;
@@ -18,7 +20,7 @@ export class PatientRegistrationComponent implements AfterViewInit, OnInit {
   constructor(private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.paciente = new Paciente('', '', 0, '');
+    this.paciente = new Paciente('', '', '', 0, '');
   }
 
   ngAfterViewInit() {
