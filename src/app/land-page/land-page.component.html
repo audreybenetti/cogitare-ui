@@ -3,7 +3,7 @@
 
     <app-search-bar (search)="performSearch($event)"></app-search-bar>
 
-    <div class="collection" *ngFor="let paciente of pacientes">
-      <a [routerLink]="['/editar', paciente.id]" class="collection-item">{{ paciente.name }}</a>
+    <div class="collection" *ngIf="pacientes">
+      <a *ngFor="let paciente of pacientes" [routerLink]="['/editar', paciente.id]" class="collection-item">{{ paciente.name }}</a>
       </div>
 </div>

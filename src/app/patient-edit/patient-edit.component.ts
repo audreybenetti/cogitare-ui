@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Paciente, pacientes } from '../paciente';
+import { Paciente } from '../model/paciente';
+import { PacienteService } from '../patient-registration/patient-storage-service';
 
 @Component({
   selector: 'app-patient-edit',
@@ -9,15 +10,16 @@ import { Paciente, pacientes } from '../paciente';
 })
 export class PatientEditComponent implements OnInit {
 
+  pacientes: Paciente[] = [];
   patient: Paciente | undefined;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private pacienteService: PacienteService) { }
 
   ngOnInit() {
+    this.pacientes = this.pacienteService.getPacientes();
     const routeParams = this.route.snapshot.paramMap;
-    const patientIdFromRoute = Number(routeParams.get('patientId'));
+    const patientIdFromRoute = routeParams.get('patientId');
   
-    
-    this.patient = pacientes.find(patient => patient.id === patientIdFromRoute);
+    this.patient = this.pacientes.find(patient => patient.id === patientIdFromRoute);
   }
 }

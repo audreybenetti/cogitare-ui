@@ -9,6 +9,8 @@ import { PatientRegistrationComponent } from './patient-registration/patient-reg
 import { LandPageComponent } from './land-page/land-page.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
