@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../model/paciente';
 import { PacienteService } from '../patient-registration/patient-storage-service';
 
@@ -12,8 +12,11 @@ export class PatientEditComponent implements OnInit {
 
   pacientes: Paciente[] = [];
   patient: Paciente | undefined;
+  pacienteId = String;
 
-  constructor(private route: ActivatedRoute, private pacienteService: PacienteService) { }
+  constructor(private route: ActivatedRoute,
+    private router : Router, 
+    private pacienteService: PacienteService) { }
 
   ngOnInit() {
     this.pacientes = this.pacienteService.getPacientes();
@@ -21,5 +24,10 @@ export class PatientEditComponent implements OnInit {
     const patientIdFromRoute = routeParams.get('patientId');
   
     this.patient = this.pacientes.find(patient => patient.id === patientIdFromRoute);
+  }
+
+  removerPaciente(id: string): void {
+    this.pacienteService.removerPaciente(id);
+    this.router.navigate(['']);
   }
 }

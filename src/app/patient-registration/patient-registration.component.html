@@ -8,7 +8,7 @@
         type="text"
         name = "name" 
         class="validate"
-        [(ngModel)]="paciente.name"
+        [(ngModel)]="this.paciente.name"
         pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
         #name = "ngModel"
         required
@@ -23,12 +23,17 @@
     <div class="row">
       <div class="input-field col s12">
         <input id="data_nascimento" 
-        type="text" 
-        class="datepicker"
+        type="date" 
+        class="validate"
         name ="birthday"
+        [(ngModel)]="this.paciente.birthday"
+        #birthday= "ngModel"
         required
         >
         <label for="data_nascimento" class="active">Data de Nascimento</label>
+        <div class="red-text" [hidden]="birthday.valid || birthday.untouched">
+          Por favor, informe uma data válida.
+        </div>
       </div>
     </div>    
     
@@ -37,7 +42,7 @@
         <p>Gênero:</p>
         <div class="radio-buttons">
           <label>
-            <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="Feminino" required/>
+            <input class="with-gap" name="genre" type="radio" [(ngModel)]="this.paciente.genre" value="Feminino" required/>
             <span>Feminino</span>
           </label>
           <label>
@@ -55,7 +60,8 @@
         name = "recordNumber" 
         type="text" 
         class="validate"
-        [(ngModel)]="paciente.recordNumber"
+        pattern="[2-9]\d*|1\d+"
+        [(ngModel)]="this.paciente.recordNumber"
         #recordNumber= "ngModel"
         required
         >
@@ -73,7 +79,7 @@
         name = "unit" 
         type="text" 
         class="validate"
-        [(ngModel)]="paciente.unit"
+        [(ngModel)]="this.paciente.unit"
         #unit= "ngModel"
         required
         >

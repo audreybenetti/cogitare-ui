@@ -10,7 +10,7 @@
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="data_nascimento" type="text" class="datepicker" value="{{ patient.birthday }}">
+          <input disabled id="data_nascimento" type="text" class="validate" value="{{ patient.birthday }}">
           <label for="data_nascimento" class="active">Data de Nascimento</label>
         </div>
       </div>    
@@ -48,7 +48,7 @@
       <div class="row">
         <div class="scol s12">
           <button class="btn waves-effect waves-light">Editar</button>
-          <button class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
+          <button (click)="removerPaciente(patient.id)" class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
         </div>
       </div>
     </form>

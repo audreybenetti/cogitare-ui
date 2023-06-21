@@ -6,19 +6,23 @@ export class Paciente {
     recordNumber: number;
     unit: string;
 
-    constructor (name: string, genre : string, birthday : Date, recordNumber: number, unit: string){
+    constructor (name: string, birthday : string, genre : string, recordNumber: number, unit: string){
       this.id = String(Math.round(Math.random() * 1000));
       this.name = name;
-      this.birthday = this.formatDateToString(birthday);
+      this.birthday = this.transformDate(birthday);
       this.genre = genre;
       this.recordNumber = recordNumber;
       this.unit = unit;
     }
 
-    formatDateToString(date: Date): string {
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear().toString();
-      return `${day}/${month}/${year}`;
+    transformDate(dateString: string): string {
+      const parts = dateString.split('-'); 
+      const year = parts[0];
+      const month = parts[1];
+      const day = parts[2];
+
+      const transformedDate = `${day}/${month}/${year}`;
+    
+      return transformedDate;
     }
   }
