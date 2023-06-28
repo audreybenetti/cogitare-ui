@@ -18,7 +18,6 @@ export class LandPageComponent implements OnInit {
 
   carregarPacientes(): void {
     this.pacientes = this.pacienteService.getPacientes();
-    console.log(this.pacienteService.getPacientes());
   }
 
   performSearch(value: string) {
