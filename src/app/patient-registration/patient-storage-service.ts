@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Paciente } from '../model/paciente';
+import { PacientePromiseService } from './patient-promise-service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,10 @@ import { Paciente } from '../model/paciente';
 export class PacienteService {
   private pacientes: Paciente[] = [];
 
-  constructor(private localStorage: LocalStorageService) {
+  constructor(
+    private localStorage: LocalStorageService,
+    private pacientePromiseService: PacientePromiseService
+  ) {
     const storedPacientes = this.localStorage.retrieve('pacientes');
     if (storedPacientes) {
       this.pacientes = storedPacientes;
@@ -16,6 +21,7 @@ export class PacienteService {
   }
 
   getPacientes(): Paciente[] {
+    this.carregarPacientes();
     return this.pacientes;
   }
 
@@ -26,6 +32,15 @@ export class PacienteService {
   adicionarPaciente(paciente: Paciente): void {
     this.pacientes.push(paciente);
     this.atualizarArmazenamentoLocal();
+    this.pacientePromiseService.save(paciente).catch((error) => {
+      console.error('Ocorreu um erro ao adicionar paciente na API:', error);
+      // Caso ocorra um erro ao adicionar o paciente na API, remova o paciente da lista local
+      const index = this.pacientes.findIndex(p => p.id === paciente.id);
+      if (index !== -1) {
+        this.pacientes.splice(index, 1);
+        this.atualizarArmazenamentoLocal();
+      }
+    });
   }
 
   atualizarPaciente(paciente: Paciente): void {
@@ -33,19 +48,32 @@ export class PacienteService {
     if (index !== -1) {
       this.pacientes[index] = paciente;
       this.atualizarArmazenamentoLocal();
+      this.pacientePromiseService.update(paciente).catch((error) => {
+        console.error('Ocorreu um erro ao atualizar paciente na API:', error);
+        // Caso ocorra um erro ao atualizar o paciente na API, restaure os dados do paciente na lista local
+        this.carregarPacientes(); // Atualize a lista local com os dados da API novamente
+      });
     }
   }
 
   removerPaciente(id: string): void {
     const index = this.pacientes.findIndex(p => p.id === id);
     if (index !== -1) {
-      this.pacientes.splice(index, 1);
-      this.atualizarArmazenamentoLocal();
+
     }
   }
 
   private atualizarArmazenamentoLocal(): void {
     this.localStorage.store('pacientes', this.pacientes);
+  }
+
+  private carregarPacientes(): void {
+    this.pacientePromiseService.getAll().then((pacientes) => {
+      this.pacientes = pacientes;
+      this.atualizarArmazenamentoLocal();
+    }).catch((error) => {
+      console.error('Ocorreu um erro ao carregar pacientes da API:', error);
+    });
   }
 
   private limparLocalStorage(): void {
