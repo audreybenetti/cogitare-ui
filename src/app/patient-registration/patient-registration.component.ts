@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
 
 import { Paciente } from '../model/paciente';
-import { PacienteService } from './patient-storage-service';
+import { PacienteService } from '../services/patient-storage-service';
 import { Router } from '@angular/router';
 
 @Component({

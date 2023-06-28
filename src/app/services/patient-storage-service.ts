@@ -25,8 +25,8 @@ export class PacienteService {
     return this.pacientes;
   }
 
-  getPaciente(id: string): Promise<Paciente | undefined> {
-    return this.pacientePromiseService.getById(id)
+  async getPaciente(id: string): Promise<Paciente | undefined> {
+    return await this.pacientePromiseService.getById(id)
       .then((paciente) => {
         return paciente;
       })
@@ -35,15 +35,12 @@ export class PacienteService {
         throw error;
       });
   }
-  
-  
 
   adicionarPaciente(paciente: Paciente): void {
     this.pacientes.push(paciente);
     this.atualizarArmazenamentoLocal();
     this.pacientePromiseService.save(paciente).catch((error) => {
       console.error('Ocorreu um erro ao adicionar paciente na API:', error);
-      // Caso ocorra um erro ao adicionar o paciente na API, remova o paciente da lista local
       const index = this.pacientes.findIndex(p => p.id === paciente.id);
       if (index !== -1) {
         this.pacientes.splice(index, 1);
@@ -59,9 +56,8 @@ export class PacienteService {
       this.atualizarArmazenamentoLocal();
       this.pacientePromiseService.update(paciente).catch((error) => {
         console.error('Ocorreu um erro ao atualizar paciente na API:', error);
-        // Caso ocorra um erro ao atualizar o paciente na API, restaure os dados do paciente na lista local
-        this.carregarPacientes(); // Atualize a lista local com os dados da API novamente
-      });
+        this.carregarPacientes(); 
+            });
     }
   }
 
@@ -73,7 +69,6 @@ export class PacienteService {
       this.pacientePromiseService.remove(id)
         .catch((error) => {
           console.error('Ocorreu um erro ao remover paciente na API:', error);
-          // Caso ocorra um erro ao remover o paciente na API, adicione novamente o paciente na lista local
           this.pacientes.push(pacienteRemovido);
           this.atualizarArmazenamentoLocal();
         });

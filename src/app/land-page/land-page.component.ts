@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Paciente } from '../model/paciente';
-import { PacienteService } from '../patient-registration/patient-storage-service';
+import { PacienteService } from '../services/patient-storage-service';
 
 @Component({
   selector: 'app-land-page',
