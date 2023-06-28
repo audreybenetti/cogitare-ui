@@ -25,9 +25,18 @@ export class PacienteService {
     return this.pacientes;
   }
 
-  getPaciente(id: string): Paciente | undefined {
-    return this.pacientes.find(paciente => paciente.id === id);
+  getPaciente(id: string): Promise<Paciente | undefined> {
+    return this.pacientePromiseService.getById(id)
+      .then((paciente) => {
+        return paciente;
+      })
+      .catch((error) => {
+        console.error('Ocorreu um erro ao obter paciente da API:', error);
+        throw error;
+      });
   }
+  
+  
 
   adicionarPaciente(paciente: Paciente): void {
     this.pacientes.push(paciente);
@@ -59,9 +68,18 @@ export class PacienteService {
   removerPaciente(id: string): void {
     const index = this.pacientes.findIndex(p => p.id === id);
     if (index !== -1) {
-
+      const pacienteRemovido = this.pacientes.splice(index, 1)[0];
+      this.atualizarArmazenamentoLocal();
+      this.pacientePromiseService.remove(id)
+        .catch((error) => {
+          console.error('Ocorreu um erro ao remover paciente na API:', error);
+          // Caso ocorra um erro ao remover o paciente na API, adicione novamente o paciente na lista local
+          this.pacientes.push(pacienteRemovido);
+          this.atualizarArmazenamentoLocal();
+        });
     }
   }
+  
 
   private atualizarArmazenamentoLocal(): void {
     this.localStorage.store('pacientes', this.pacientes);

@@ -30,14 +30,14 @@ export class PacientePromiseService {
     }
   }
 
-  async getById(paciente: Paciente): Promise<Paciente[]> {
+  async getById(id: String): Promise<Paciente> {
     try {
-      const response = await fetch(`${this.URL_PT}/${paciente}`);
+      const response = await fetch(`${this.URL_PT}/${id}`);
       if (!response.ok) {
         throw new Error('Erro ao obter paciente da API');
       }
       const data = await response.json();
-      return data as Paciente[];
+      return data as Paciente;
     } catch (error) {
       console.error('Ocorreu um erro ao obter paciente da API:', error);
       throw error;
@@ -97,4 +97,19 @@ export class PacientePromiseService {
       throw error;
     }
   }
+
+  async remove(id: string): Promise<void> {
+    try {
+      const response = await fetch(`${this.URL_PT}/${id}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) {
+        throw new Error('Erro ao remover paciente na API');
+      }
+    } catch (error) {
+      console.error('Ocorreu um erro ao remover paciente na API:', error);
+      throw error;
+    }
+  }
+  
 }

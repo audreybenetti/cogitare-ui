@@ -12,22 +12,26 @@ export class PatientEditComponent implements OnInit {
 
   pacientes: Paciente[] = [];
   patient: Paciente | undefined;
-  pacienteId = String;
+  pacienteId: string | undefined;
 
   constructor(private route: ActivatedRoute,
     private router : Router, 
     private pacienteService: PacienteService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.pacientes = this.pacienteService.getPacientes();
     const routeParams = this.route.snapshot.paramMap;
     const patientIdFromRoute = routeParams.get('patientId');
-  
-    this.patient = this.pacientes.find(patient => patient.id === patientIdFromRoute);
+
+    if (patientIdFromRoute !== null && patientIdFromRoute !== undefined) {
+      this.patient = await this.pacienteService.getPaciente(patientIdFromRoute);
+    } else {
+      console.error('O ID do paciente não foi fornecido.');
+    }
   }
 
-  removerPaciente(id: string): void {
-    this.pacienteService.removerPaciente(id);
+  async removerPaciente(id: string): Promise<void> {
+    await this.pacienteService.removerPaciente(id);
     this.router.navigate(['']);
   }
 }
