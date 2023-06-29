@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../model/paciente';
 import { PacienteStorage } from '../services/patient-storage-service';
@@ -10,20 +10,22 @@ import { PacienteObservable } from '../services/patient-observable-service';
   styleUrls: ['./patient-edit.component.css']
 })
 export class PatientEditComponent implements OnInit {
-
   pacientes: Paciente[] = [];
-  patient: Paciente | undefined;
+  paciente!: Paciente;
   pacienteId = String;
+  isEditing = false;
 
-  constructor(private route: ActivatedRoute,
-    private router : Router, 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private pacienteService: PacienteStorage,
-    private pacienteObservable: PacienteObservable) { }
+    private pacienteObservable: PacienteObservable,
+  ) {}
 
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const patientIdFromRoute = routeParams.get('patientId');
-  
+
     if (patientIdFromRoute !== null && patientIdFromRoute !== undefined) {
       this.buscarPaciente(patientIdFromRoute);
     } else {
@@ -31,17 +33,25 @@ export class PatientEditComponent implements OnInit {
     }
   }
 
-  buscarPaciente(id : string): void {
+  buscarPaciente(id: string): void {
     this.pacienteObservable.getById(id).subscribe({
       next: (paciente) => {
-        this.patient = paciente;
+        this.paciente = paciente;
         console.log('Paciente encontrado com sucesso');
       },
       error: (error) => {
-        this.patient = undefined;
         console.error('Ocorreu um erro ao buscar o paciente:', error);
       }
     });
+  }
+
+  habilitarEdicao() {
+    this.isEditing = true;
+  }
+
+  onSubmit(): void {
+    this.isEditing = false;
+    this.pacienteService.atualizarPaciente(this.paciente);
   }
 
   removerPaciente(id: string): void {

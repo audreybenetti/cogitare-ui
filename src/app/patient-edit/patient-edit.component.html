@@ -1,16 +1,15 @@
-
-<div class="container" *ngIf="patient">
+<div class="container" *ngIf="paciente && !isEditing">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="nome_completo" type="text" class="validate" value="{{ patient.name | titlecase }}">
+          <input disabled id="nome_completo" type="text" class="validate" value="{{ paciente.name | titlecase }}">
           <label for="nome_completo" class="active">Nome completo</label>
         </div>
       </div>
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="data_nascimento" type="text" class="validate" [value]="patient.birthday | date: 'dd/MM/yyyy'">
+          <input disabled id="data_nascimento" type="text" class="validate" [value]="paciente.birthday | date: 'dd/MM/yyyy'">
           <label for="data_nascimento" class="active">Data de Nascimento</label>
         </div>
       </div>    
@@ -20,11 +19,11 @@
           <p>Gênero:</p>
           <div class="radio-buttons">
             <label>
-              <input disabled class="with-gap" name="genero" type="radio" [checked]="patient.genre === 'Feminino'" />
+              <input disabled class="with-gap" name="genero" type="radio" [checked]="paciente.genre === 'Feminino'" />
               <span>Feminino</span>
             </label>
             <label>
-              <input disabled class="with-gap" name="genero" type="radio" [checked]="patient.genre === 'Masculino'" />
+              <input disabled class="with-gap" name="genero" type="radio" [checked]="paciente.genre === 'Masculino'" />
               <span>Masculino</span>
             </label>
           </div>
@@ -33,24 +32,124 @@
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="prontuario" type="text" class="validate" value="{{ patient.recordNumber}}">
+          <input disabled id="prontuario" type="text" class="validate" value="{{ paciente.recordNumber}}">
           <label for="prontuario" class="active">Prontuário</label>
         </div>
       </div>
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="unidade-internacao" type="text" class="validate" value="{{ patient.unit | titlecase }}">
+          <input disabled id="unidade-internacao" type="text" class="validate" value="{{ paciente.unit | titlecase }}">
           <label for="unidade-internacao" class="active">Unidade de Internação</label>
         </div>
       </div>
   
       <div class="row">
         <div class="scol s12">
-          <button class="btn waves-effect waves-light">Editar</button>
-          <button (click)="removerPaciente(patient.id)" class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
+          <button (click)="habilitarEdicao()" class="btn waves-effect waves-light">Editar</button>
+          <button (click)="removerPaciente(paciente.id)" class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
         </div>
       </div>
     </form>
   </div>
    
+  <div class="container">
+    <form class="col s12" *ngIf="isEditing" #pacienteForm="ngForm" (submit)="onSubmit()">
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input 
+          id="nome_completo" 
+          type="text"
+          name = "name" 
+          class="validate"
+          [(ngModel)]="this.paciente.name"
+          pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          #name = "ngModel"
+          required
+          >
+          <label for="nome_completo" class="active">Nome completo</label>
+          <div class="red-text" [hidden]="name.valid || name.untouched">
+            Por favor, informe o nome completo do paciente.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="data_nascimento" 
+          type="date" 
+          class="validate"
+          name ="birthday"
+          [(ngModel)]="this.paciente.birthday"
+          #birthday= "ngModel"
+          required
+          >
+          <label for="data_nascimento" class="active">Data de Nascimento</label>
+          <div class="red-text" [hidden]="birthday.valid || birthday.untouched">
+            Por favor, informe uma data válida.
+          </div>
+        </div>
+      </div>    
+      
+      <div class="row">
+        <div class="col s12">
+          <p>Gênero:</p>
+          <div class="radio-buttons">
+            <label>
+              <input class="with-gap" name="genre" type="radio" [(ngModel)]="this.paciente.genre" value="Feminino" required/>
+              <span>Feminino</span>
+            </label>
+            <label>
+              <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="Masculino" required/>
+              <span>Masculino</span>
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input 
+          id="prontuario" 
+          name = "recordNumber" 
+          type="text" 
+          class="validate"
+          pattern="[2-9]\d*|1\d+"
+          [(ngModel)]="this.paciente.recordNumber"
+          #recordNumber= "ngModel"
+          required
+          >
+          <label for="prontuario" class="active">Prontuário</label>
+          <div class="red-text" [hidden]="recordNumber.valid || recordNumber.untouched">
+            Por favor, informe o número do prontuário do paciente.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <input 
+          id="unidade-internacao" 
+          name = "unit" 
+          type="text" 
+          class="validate"
+          [(ngModel)]="this.paciente.unit"
+          #unit= "ngModel"
+          required
+          >
+          <label for="unidade-internacao" class="active">Unidade de Internação</label>
+          <div class="red-text" [hidden]="unit.valid || unit.untouched">
+            Por favor, informe a unidade de internação do paciente.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="input-field col s12">
+          <button type="submit" [disabled]="!pacienteForm.valid" #submitButton class="btn waves-effect waves-light">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  
