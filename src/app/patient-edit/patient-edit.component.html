@@ -3,14 +3,14 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="nome_completo" type="text" class="validate" value="{{ patient.name }}">
+          <input disabled id="nome_completo" type="text" class="validate" value="{{ patient.name | titlecase }}">
           <label for="nome_completo" class="active">Nome completo</label>
         </div>
       </div>
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="data_nascimento" type="text" class="validate" value="{{ patient.birthday }}">
+          <input disabled id="data_nascimento" type="text" class="validate" [value]="patient.birthday | date: 'dd/MM/yyyy'">
           <label for="data_nascimento" class="active">Data de Nascimento</label>
         </div>
       </div>    
@@ -40,7 +40,7 @@
   
       <div class="row">
         <div class="input-field col s12">
-          <input disabled id="unidade-internacao" type="text" class="validate" value="{{ patient.unit }}">
+          <input disabled id="unidade-internacao" type="text" class="validate" value="{{ patient.unit | titlecase }}">
           <label for="unidade-internacao" class="active">Unidade de Internação</label>
         </div>
       </div>

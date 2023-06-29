@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Paciente } from '../model/paciente';
-import { PacienteService } from '../services/patient-storage-service';
+import { PacienteStorage } from '../services/patient-storage-service';
+import { Observable } from 'rxjs';
+import { PacienteObservable } from '../services/patient-observable-service';
 
 @Component({
   selector: 'app-land-page',
@@ -8,16 +10,24 @@ import { PacienteService } from '../services/patient-storage-service';
   styleUrls: ['./land-page.component.css']
 })
 export class LandPageComponent implements OnInit {
-  pacientes: Paciente[] = [];
+  pacientes: Paciente[] | undefined;
 
-  constructor(private pacienteService: PacienteService) { }
+  constructor(private pacienteService: PacienteStorage,
+    private pacienteObservable: PacienteObservable) { }
 
   ngOnInit(): void {
     this.carregarPacientes();
   }
 
   carregarPacientes(): void {
-    this.pacientes = this.pacienteService.getPacientes();
+    this.pacienteObservable.getAll().subscribe({
+      next: (pacientes) => {
+        this.pacientes = pacientes;
+      },
+      error: (error) => {
+        console.error('Ocorreu um erro ao obter pacientes:', error);
+      }
+    });
   }
 
   performSearch(value: string) {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../model/paciente';
-import { PacienteService } from '../services/patient-storage-service';
+import { PacienteStorage } from '../services/patient-storage-service';
+import { PacienteObservable } from '../services/patient-observable-service';
 
 @Component({
   selector: 'app-patient-edit',
@@ -12,26 +13,39 @@ export class PatientEditComponent implements OnInit {
 
   pacientes: Paciente[] = [];
   patient: Paciente | undefined;
-  pacienteId: string | undefined;
+  pacienteId = String;
 
   constructor(private route: ActivatedRoute,
     private router : Router, 
-    private pacienteService: PacienteService) { }
+    private pacienteService: PacienteStorage,
+    private pacienteObservable: PacienteObservable) { }
 
-  async ngOnInit() {
-    this.pacientes = this.pacienteService.getPacientes();
+  ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const patientIdFromRoute = routeParams.get('patientId');
-
+  
     if (patientIdFromRoute !== null && patientIdFromRoute !== undefined) {
-      this.patient = await this.pacienteService.getPaciente(patientIdFromRoute);
+      this.buscarPaciente(patientIdFromRoute);
     } else {
       console.error('O ID do paciente não foi fornecido.');
     }
   }
 
-  async removerPaciente(id: string): Promise<void> {
-    await this.pacienteService.removerPaciente(id);
+  buscarPaciente(id : string): void {
+    this.pacienteObservable.getById(id).subscribe({
+      next: (paciente) => {
+        this.patient = paciente;
+        console.log('Paciente encontrado com sucesso');
+      },
+      error: (error) => {
+        this.patient = undefined;
+        console.error('Ocorreu um erro ao buscar o paciente:', error);
+      }
+    });
+  }
+
+  removerPaciente(id: string): void {
+    this.pacienteService.removerPaciente(id);
     this.router.navigate(['']);
   }
 }
