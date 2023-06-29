@@ -12,6 +12,7 @@ import { PacienteObservable } from '../services/patient-observable-service';
 export class PatientEditComponent implements OnInit {
   pacientes: Paciente[] = [];
   paciente!: Paciente;
+  pacienteOriginal!: Paciente;
   pacienteId = String;
   isEditing = false;
 
@@ -37,6 +38,7 @@ export class PatientEditComponent implements OnInit {
     this.pacienteObservable.getById(id).subscribe({
       next: (paciente) => {
         this.paciente = paciente;
+        this.pacienteOriginal = this.paciente;
         console.log('Paciente encontrado com sucesso');
       },
       error: (error) => {
@@ -45,13 +47,13 @@ export class PatientEditComponent implements OnInit {
     });
   }
 
-  habilitarEdicao(isEditing : boolean) {
-    if (isEditing) {
-      this.isEditing = true;
-    } else {
-      this.isEditing = false;
-    }
-    
+  habilitarEdicao() {
+    this.isEditing = true;
+  }
+
+  cancelarEdicao() {
+    this.paciente = { ...this.pacienteOriginal };
+    this.isEditing = false;
   }
 
   onSubmit(): void {

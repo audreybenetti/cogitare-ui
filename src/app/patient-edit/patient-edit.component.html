@@ -16,7 +16,7 @@
   
       <div class="row">
         <div class="col s12">
-          <p>Gênero:</p>
+          <label class="active">Gênero:</label>
           <div class="radio-buttons">
             <label>
               <input disabled class="with-gap" name="genero" type="radio" [checked]="paciente.genre === 'Feminino'" />
@@ -46,7 +46,7 @@
   
       <div class="row">
         <div class="scol s12">
-          <button (click)="habilitarEdicao(true)" class="btn waves-effect waves-light">Editar</button>
+          <button (click)="habilitarEdicao()" class="btn waves-effect waves-light">Editar</button>
           <button (click)="removerPaciente(paciente.id)" class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
         </div>
       </div>
@@ -94,14 +94,14 @@
       
       <div class="row">
         <div class="col s12">
-          <p>Gênero:</p>
+          <label class="active">Gênero:</label>
           <div class="radio-buttons">
             <label>
               <input class="with-gap" name="genre" type="radio" [(ngModel)]="this.paciente.genre" value="Feminino" required/>
               <span>Feminino</span>
             </label>
             <label>
-              <input class="with-gap" name="genre" type="radio" [(ngModel)]="paciente.genre" value="Masculino" required/>
+              <input class="with-gap" name="genre" type="radio" [(ngModel)]="this.paciente.genre" value="Masculino" required/>
               <span>Masculino</span>
             </label>
           </div>
@@ -148,7 +148,7 @@
       <div class="row">
         <div class="input-field col s12">
           <button type="submit" [disabled]="!pacienteForm.valid" #submitButton class="btn waves-effect waves-light">Salvar</button>
-          <button (click)="habilitarEdicao(false)" class="btn waves-effect waves-light" style="margin-left: 10px;">Cancelar</button>
+          <button (click)="cancelarEdicao()" class="btn waves-effect waves-light" style="margin-left: 10px;">Cancelar</button>
         </div>
       </div>
     </form>
