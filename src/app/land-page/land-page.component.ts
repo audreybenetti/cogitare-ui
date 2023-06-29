@@ -3,6 +3,7 @@ import { Paciente } from '../model/paciente';
 import { PacienteStorage } from '../services/patient-storage-service';
 import { Observable } from 'rxjs';
 import { PacienteObservable } from '../services/patient-observable-service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-land-page',
@@ -10,24 +11,16 @@ import { PacienteObservable } from '../services/patient-observable-service';
   styleUrls: ['./land-page.component.css']
 })
 export class LandPageComponent implements OnInit {
-  pacientes: Paciente[] | undefined;
+  pacientes$: Observable<Paciente[]> | undefined;
 
-  constructor(private pacienteService: PacienteStorage,
-    private pacienteObservable: PacienteObservable) { }
+  constructor(private pacienteObservable: PacienteObservable) { }
 
   ngOnInit(): void {
     this.carregarPacientes();
   }
 
   carregarPacientes(): void {
-    this.pacienteObservable.getAll().subscribe({
-      next: (pacientes) => {
-        this.pacientes = pacientes;
-      },
-      error: (error) => {
-        console.error('Ocorreu um erro ao obter pacientes:', error);
-      }
-    });
+    this.pacientes$ = this.pacienteObservable.getAll();
   }
 
   performSearch(value: string) {
