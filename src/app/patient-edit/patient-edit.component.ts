@@ -13,7 +13,6 @@ export class PatientEditComponent implements OnInit {
   pacientes: Paciente[] = [];
   paciente!: Paciente;
   pacienteOriginal!: Paciente;
-  pacienteId = String;
   isEditing = false;
 
   constructor(
@@ -38,7 +37,6 @@ export class PatientEditComponent implements OnInit {
     this.pacienteObservable.getById(id).subscribe({
       next: (paciente) => {
         this.paciente = paciente;
-        this.pacienteOriginal = this.paciente;
         console.log('Paciente encontrado com sucesso');
       },
       error: (error) => {
@@ -52,8 +50,8 @@ export class PatientEditComponent implements OnInit {
   }
 
   cancelarEdicao() {
-    this.paciente = { ...this.pacienteOriginal };
     this.isEditing = false;
+    this.paciente = this.pacienteOriginal;
   }
 
   onSubmit(): void {
