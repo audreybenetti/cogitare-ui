@@ -46,7 +46,7 @@
   
       <div class="row">
         <div class="scol s12">
-          <button (click)="habilitarEdicao()" class="btn waves-effect waves-light">Editar</button>
+          <button (click)="habilitarEdicao(true)" class="btn waves-effect waves-light">Editar</button>
           <button (click)="removerPaciente(paciente.id)" class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
         </div>
       </div>
@@ -148,6 +148,7 @@
       <div class="row">
         <div class="input-field col s12">
           <button type="submit" [disabled]="!pacienteForm.valid" #submitButton class="btn waves-effect waves-light">Salvar</button>
+          <button (click)="habilitarEdicao(false)" class="btn waves-effect waves-light" style="margin-left: 10px;">Cancelar</button>
         </div>
       </div>
     </form>

@@ -45,8 +45,13 @@ export class PatientEditComponent implements OnInit {
     });
   }
 
-  habilitarEdicao() {
-    this.isEditing = true;
+  habilitarEdicao(isEditing : boolean) {
+    if (isEditing) {
+      this.isEditing = true;
+    } else {
+      this.isEditing = false;
+    }
+    
   }
 
   onSubmit(): void {
