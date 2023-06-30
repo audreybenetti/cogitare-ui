@@ -2,5 +2,5 @@
 	"/pacientes": "/patients",
 	"/pacientes/:id": "/patients/:id",
 	"/pacientes/:patientId/relatorios": "/patients/:patientId/reports",
-	"/pacientes/:patientId/relatorios/:id": "/patients/:patientId/reports/:id"
+	"/relatorios/:reportId": "/reports/:reportId"
 }

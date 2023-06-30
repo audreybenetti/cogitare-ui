@@ -62,8 +62,8 @@ export class PacienteObservable {
     );
   }
 
-  getRelatorioById(pacienteId: string, relatorioId: string): Observable<Relatorio> {
-    return this.http.get<Relatorio>(`${this.URL_PT}/${pacienteId}/relatorios/${relatorioId}`).pipe(
+  getRelatorioById(idReport: string): Observable<Relatorio> {
+    return this.http.get<Relatorio>(`http://localhost:3000/relatorios/${idReport}`).pipe(
       catchError((error) => this.handleError(error))
     );
   }

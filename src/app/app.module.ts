@@ -12,7 +12,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HttpClientModule } from '@angular/common/http';
-import { ReportRegistrationComponent } from './report-registration/report-registration.component'
+import { ReportRegistrationComponent } from './report-registration/report-registration.component';
+import { ReportViewComponent } from './report-view/report-view.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ReportRegistrationComponent } from './report-registration/report-regist
     LandPageComponent,
     PatientEditComponent,
     SearchBarComponent,
-    ReportRegistrationComponent
+    ReportRegistrationComponent,
+    ReportViewComponent
   ],
   imports: [
     BrowserModule,

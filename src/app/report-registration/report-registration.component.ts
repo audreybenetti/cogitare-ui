@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Relatorio } from '../model/relatorio';
 import { PacienteStorage } from '../services/patient-storage-service';
 
@@ -12,12 +12,13 @@ export class ReportRegistrationComponent {
   relatorio!: Relatorio;
   pacienteId: string;
 
-  constructor(private route: ActivatedRoute, private pacienteService: PacienteStorage) {
+  constructor(private route: ActivatedRoute, private pacienteService: PacienteStorage, private router : Router) {
     this.pacienteId = this.route.snapshot.paramMap.get('patientId')!;
-    this.relatorio = new Relatorio(false, false, false, false, this.pacienteId);
+    this.relatorio = new Relatorio('', '', '', '', this.pacienteId);
   }
 
   onSubmit(): void {
     this.pacienteService.salvarRelatorio(this.pacienteId, this.relatorio);
+    this.router.navigate(['/editar', this.pacienteId]);
   }
 }
