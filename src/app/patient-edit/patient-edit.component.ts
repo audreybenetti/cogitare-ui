@@ -37,10 +37,7 @@ export class PatientEditComponent implements OnInit {
   }
 
   carregarRelatorios(id: string): void {
-    this.pacienteObservable.getRelatoriosByPacienteId(id).subscribe(relatorios => {
-      this.relatorios$ = of(relatorios);
-      console.log(this.relatorios$);
-    });
+    this.relatorios$ = this.pacienteObservable.getRelatoriosByPacienteId(id);
   }
 
   buscarPaciente(id: string): void {
