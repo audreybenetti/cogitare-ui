@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Paciente } from '../model/paciente';
 import { PacienteObservable } from './patient-observable-service';
+import { Relatorio } from '../model/relatorio';
 
 
 @Injectable({
@@ -57,6 +58,17 @@ export class PacienteStorage {
       },
       error: (error) => {
         console.error('Ocorreu um erro ao salvar o paciente:', error);
+      }
+    });
+  }
+
+  salvarRelatorio(idPaciente: string, relatorio : Relatorio): void {
+    this.pacienteService.saveRelatorio(idPaciente, relatorio).subscribe({
+      next: (novoRelatorio) => {
+        console.log('Relatorio salvo com sucesso:', novoRelatorio);
+      },
+      error: (error) => {
+        console.error('Ocorreu um erro ao salvar o relatorio:', error);
       }
     });
   }

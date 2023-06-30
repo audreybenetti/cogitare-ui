@@ -1,3 +1,5 @@
+import { Relatorio } from "./relatorio";
+
 export class Paciente {
     id!: string;
     name?: string;
@@ -5,6 +7,7 @@ export class Paciente {
     genre: string;
     recordNumber: number;
     unit: string;
+    reports?: Relatorio[] = [];
 
     constructor (name: string, birthday : Date, genre : string, recordNumber: number, unit: string){
       this.id = String(Math.round(Math.random() * 1000));

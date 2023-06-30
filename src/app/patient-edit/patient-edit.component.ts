@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../model/paciente';
 import { PacienteStorage } from '../services/patient-storage-service';
 import { PacienteObservable } from '../services/patient-observable-service';
+import { Relatorio } from '../model/relatorio';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-patient-edit',
@@ -12,7 +14,7 @@ import { PacienteObservable } from '../services/patient-observable-service';
 export class PatientEditComponent implements OnInit {
   pacientes: Paciente[] = [];
   paciente!: Paciente;
-  pacienteOriginal!: Paciente;
+  relatorios$: Observable<Relatorio[]> | undefined;
   isEditing = false;
 
   constructor(
@@ -21,23 +23,31 @@ export class PatientEditComponent implements OnInit {
     private pacienteService: PacienteStorage,
     private pacienteObservable: PacienteObservable,
   ) {}
-
+  
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const patientIdFromRoute = routeParams.get('patientId');
 
     if (patientIdFromRoute !== null && patientIdFromRoute !== undefined) {
       this.buscarPaciente(patientIdFromRoute);
+      this.carregarRelatorios(patientIdFromRoute);
     } else {
       console.error('O ID do paciente não foi fornecido.');
     }
+  }
+
+  carregarRelatorios(id: string): void {
+    this.pacienteObservable.getRelatoriosByPacienteId(id).subscribe(relatorios => {
+      this.relatorios$ = of(relatorios);
+      console.log(this.relatorios$);
+    });
   }
 
   buscarPaciente(id: string): void {
     this.pacienteObservable.getById(id).subscribe({
       next: (paciente) => {
         this.paciente = paciente;
-        console.log('Paciente encontrado com sucesso');
+        console.log('Paciente encontrado com sucesso.');
       },
       error: (error) => {
         console.error('Ocorreu um erro ao buscar o paciente:', error);
@@ -47,11 +57,6 @@ export class PatientEditComponent implements OnInit {
 
   habilitarEdicao() {
     this.isEditing = true;
-  }
-
-  cancelarEdicao() {
-    this.isEditing = false;
-    this.paciente = this.pacienteOriginal;
   }
 
   onSubmit(): void {

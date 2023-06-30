@@ -48,5 +48,25 @@
       "recordNumber": "13234243",
       "unit": "Centro Cirúrgico"
     }
+  ],
+  "reports": [
+    {
+      "id": "465",
+      "eldreteKroulik": true,
+      "sinaisNausea": false,
+      "intensidadeDor": false,
+      "sinaisSangramento": false,
+      "dataAtendimento": "2003-06-30",
+      "patientId": "211"
+    },
+    {
+      "id": "487",
+      "eldreteKroulik": "false",
+      "sinaisNausea": "true",
+      "intensidadeDor": "false",
+      "sinaisSangramento": "false",
+      "patientId": "1",
+      "dataAtendimento": "2023-06-30T17:53:05.213Z"
+    }
   ]
 }

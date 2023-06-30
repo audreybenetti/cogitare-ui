@@ -1,4 +1,5 @@
 <div class="container" *ngIf="paciente && !isEditing">
+  <p>Detalhes do paciente</p>
     <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
@@ -50,6 +51,34 @@
           <button (click)="removerPaciente(paciente.id)" class="btn waves-effect waves-light" style="margin-left: 10px;">Excluir</button>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col s12">
+          <hr class="divider">
+          <p>Atendimentos recentes</p>
+      
+          <div class="collection" *ngIf="(relatorios$ | async)?.length; else semRelatorios">
+            <a class="center-align" *ngFor="let relatorio of relatorios$ | async" [routerLink]="['/editar', paciente.id]">
+              <td>{{ relatorio.id }}</td>
+              <td>{{ relatorio.dataAtendimento | date: 'dd/MM/yyyy' }}</td>
+            </a>
+          </div>
+      
+          <ng-template #semRelatorios>
+            <label class="center-align">Não há atendimentos cadastrados.</label>
+          </ng-template>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col s12">
+          <button class="btn waves-effect waves-light" [routerLink]="['/editar', paciente.id, 'relatorio']">Novo atendimento</button>
+        </div>
+      </div>
+      
+      
+
+
     </form>
   </div>
    

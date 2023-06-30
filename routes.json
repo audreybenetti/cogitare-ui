@@ -1,4 +1,6 @@
 {
 	"/pacientes": "/patients",
-	"/pacientes/:id": "/patients/:id"
+	"/pacientes/:id": "/patients/:id",
+	"/pacientes/:patientId/relatorios": "/patients/:patientId/reports",
+	"/pacientes/:patientId/relatorios/:id": "/patients/:patientId/reports/:id"
 }
