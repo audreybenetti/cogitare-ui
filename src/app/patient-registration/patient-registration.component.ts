@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
 
 import { Paciente } from '../model/paciente';
-import { PacienteService } from './patient-storage-service';
+import { PacienteStorage } from '../services/patient-storage-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,24 +13,19 @@ export class PatientRegistrationComponent implements OnInit {
 
   paciente!: Paciente;
 
-  constructor(private pacienteService: PacienteService,
+  constructor(private pacienteService: PacienteStorage,
     private router : Router) { }
 
   ngOnInit(): void {
-    this.paciente = new Paciente('', '', '', 0, '');
+    this.paciente = new Paciente('', new Date, '', 0, '');
   }
 
   adicionarPaciente(paciente: Paciente): void {
-    this.pacienteService.adicionarPaciente(paciente);
+    this.pacienteService.salvarPaciente(paciente);
     this.router.navigate(['/editar', paciente.id]);
   }
 
   onSubmit(): void {
     this.adicionarPaciente(this.paciente);
   }
-
-  removerPaciente(id: string): void {
-    this.pacienteService.removerPaciente(id);
-  }
-
 }

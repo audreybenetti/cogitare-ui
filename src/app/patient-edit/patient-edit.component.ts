@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Paciente } from '../model/paciente';
-import { PacienteService } from '../patient-registration/patient-storage-service';
+import { PacienteStorage } from '../services/patient-storage-service';
+import { PacienteObservable } from '../services/patient-observable-service';
+import { Relatorio } from '../model/relatorio';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-patient-edit',
@@ -9,21 +12,53 @@ import { PacienteService } from '../patient-registration/patient-storage-service
   styleUrls: ['./patient-edit.component.css']
 })
 export class PatientEditComponent implements OnInit {
-
   pacientes: Paciente[] = [];
-  patient: Paciente | undefined;
-  pacienteId = String;
+  paciente!: Paciente;
+  relatorios$: Observable<Relatorio[]> | undefined;
+  isEditing = false;
 
-  constructor(private route: ActivatedRoute,
-    private router : Router, 
-    private pacienteService: PacienteService) { }
-
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private pacienteService: PacienteStorage,
+    private pacienteObservable: PacienteObservable,
+  ) {}
+  
   ngOnInit() {
-    this.pacientes = this.pacienteService.getPacientes();
     const routeParams = this.route.snapshot.paramMap;
     const patientIdFromRoute = routeParams.get('patientId');
-  
-    this.patient = this.pacientes.find(patient => patient.id === patientIdFromRoute);
+
+    if (patientIdFromRoute !== null && patientIdFromRoute !== undefined) {
+      this.buscarPaciente(patientIdFromRoute);
+      this.carregarRelatorios(patientIdFromRoute);
+    } else {
+      console.error('O ID do paciente não foi fornecido.');
+    }
+  }
+
+  carregarRelatorios(id: string): void {
+    this.relatorios$ = this.pacienteObservable.getRelatoriosByPacienteId(id);
+  }
+
+  buscarPaciente(id: string): void {
+    this.pacienteObservable.getById(id).subscribe({
+      next: (paciente) => {
+        this.paciente = paciente;
+        console.log('Paciente encontrado com sucesso.');
+      },
+      error: (error) => {
+        console.error('Ocorreu um erro ao buscar o paciente:', error);
+      }
+    });
+  }
+
+  habilitarEdicao() {
+    this.isEditing = true;
+  }
+
+  onSubmit(): void {
+    this.isEditing = false;
+    this.pacienteService.atualizarPaciente(this.paciente);
   }
 
   removerPaciente(id: string): void {

@@ -1,0 +1,6 @@
+{
+	"/pacientes": "/patients",
+	"/pacientes/:id": "/patients/:id",
+	"/pacientes/:patientId/relatorios": "/patients/:patientId/reports",
+	"/relatorios/:reportId": "/reports/:reportId"
+}

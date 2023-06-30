@@ -11,6 +11,9 @@ import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { HttpClientModule } from '@angular/common/http';
+import { ReportRegistrationComponent } from './report-registration/report-registration.component';
+import { ReportViewComponent } from './report-view/report-view.component'
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     PatientRegistrationComponent,
     LandPageComponent,
     PatientEditComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ReportRegistrationComponent,
+    ReportViewComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     NgxWebstorageModule.forRoot()

@@ -1,0 +1,26 @@
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 85px;
+    max-width: 600px;
+}
+
+.btn {
+    background-color: #3e64ff;
+}
+
+input[type="checkbox"].with-gap:checked{
+    background-color: #3e64ff;
+  }
+  
+p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    color: #737373;
+    text-decoration: none;
+}
+
+.checkbox-label {
+    font-size: 12px !important;
+}

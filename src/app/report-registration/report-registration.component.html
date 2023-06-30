@@ -1,0 +1,135 @@
+<div class="container">
+    <p>Avaliação sinais vitais</p>
+    <form class="col s12" #relatorioForm="ngForm"
+        (submit)="onSubmit()">
+
+        <div class="row">
+            <div class="col s12">
+                <label class="active">O paciente
+                    obteve uma pontuação mínima de
+                    oito pontos na escala de
+                    Aldrete e Kroulik?</label>
+                <div class="radio-buttons">
+                    <label>
+                        <input class="with-gap"
+                            name="eldreteKroulik"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.eldreteKroulik"
+                            value=true required />
+                        <span
+                            class="checkbox-label">Sim</span>
+                    </label>
+                    <label
+                        style="margin-left: 3%;">
+                        <input class="with-gap"
+                            name="eldreteKroulik"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.eldreteKroulik"
+                            value=false
+                            required />
+                        <span
+                            class="checkbox-label">Não</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <label class="active">O paciente
+                    apresentou sinais de
+                    náusea?</label>
+                <div class="radio-buttons">
+                    <label>
+                        <input class="with-gap"
+                            name="nausea"
+                            type="radio"
+                            [(ngModel)]="relatorio.sinaisNausea"
+                            value=true required />
+                        <span
+                            class="checkbox-label">Sim</span>
+                    </label>
+                    <label
+                        style="margin-left: 3%;">
+                        <input class="with-gap"
+                            name="nausea"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.sinaisNausea"
+                            value=false
+                            required />
+                        <span
+                            class="checkbox-label">Não</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <label class="active">O paciente
+                    apresentou intensidade de dor
+                    acima de 4?</label>
+                <div class="radio-buttons">
+                    <label>
+                        <input class="with-gap"
+                            name="intensidadeDor"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.intensidadeDor"
+                            value=true required />
+                        <span
+                            class="checkbox-label">Sim</span>
+                    </label>
+                    <label
+                        style="margin-left: 3%;">
+                        <input class="with-gap"
+                            name="intensidadeDor"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.intensidadeDor"
+                            value=false
+                            required />
+                        <span
+                            class="checkbox-label">Não</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <label class="active">O paciente
+                    possui sinais de
+                    sangramento?</label>
+                <div class="radio-buttons">
+                    <label>
+                        <input class="with-gap"
+                            name="sinaisSangramento"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.sinaisSangramento"
+                            value=true required />
+                        <span
+                            class="checkbox-label">Sim</span>
+                    </label>
+                    <label
+                        style="margin-left: 3%;">
+                        <input class="with-gap"
+                            name="sinaisSangramento"
+                            type="radio"
+                            [(ngModel)]="this.relatorio.sinaisSangramento"
+                            value=false
+                            required />
+                        <span
+                            class="checkbox-label">Não</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <button type="submit"
+                    #submitButton
+                    class="btn waves-effect waves-light">Registrar</button>
+            </div>
+        </div>
+    </form>
+</div>

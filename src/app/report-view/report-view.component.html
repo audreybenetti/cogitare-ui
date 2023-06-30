@@ -1,0 +1,111 @@
+<div class="container"
+    *ngIf="relatorio$ | async as relatorio">
+    <p>Avaliação sinais vitais: {{
+        relatorio.dataAtendimento | date:
+        'dd/MM/yyyy HH:mm' }}</p>
+
+    <div class="row">
+        <div class="col s12">
+            <label class="active">O paciente
+                obteve uma pontuação mínima de
+                oito pontos na escala de Aldrete e
+                Kroulik?</label>
+            <div class="radio-buttons">
+                <label>
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.eldreteKroulik === 'true'" />
+                    <span
+                        class="checkbox-label">Sim</span>
+                </label>
+                <label style="margin-left: 3%;">
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.eldreteKroulik === 'false'" />
+                    <span
+                        class="checkbox-label">Não</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <label class="active">O paciente
+                apresentou sinais de
+                náusea?</label>
+            <div class="radio-buttons">
+                <label>
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.sinaisNausea === 'true'" />
+                    <span
+                        class="checkbox-label">Sim</span>
+                </label>
+                <label style="margin-left: 3%;">
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.sinaisNausea === 'false'" />
+                    <span
+                        class="checkbox-label">Não</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <label class="active">O paciente
+                apresentou intensidade de dor
+                acima de 4?</label>
+            <div class="radio-buttons">
+                <label>
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.intensidadeDor === 'true'" />
+                    <span
+                        class="checkbox-label">Sim</span>
+                </label>
+                <label style="margin-left: 3%;">
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.intensidadeDor === 'false'" />
+                    <span
+                        class="checkbox-label">Não</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <label class="active">O paciente
+                possui sinais de
+                sangramento?</label>
+            <div class="radio-buttons">
+                <label>
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.sinaisSangramento === 'true'" />
+                    <span
+                        class="checkbox-label">Sim</span>
+                </label>
+                <label style="margin-left: 3%;">
+                    <input disabled="with-gap"
+                        type="radio"
+                        [checked]="relatorio.sinaisSangramento === 'false'" />
+                    <span
+                        class="checkbox-label">Não</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <button
+                [routerLink]="['/editar', relatorio.patientId]"
+                class="btn waves-effect waves-light">Voltar</button>
+        </div>
+    </div>
+</div>
