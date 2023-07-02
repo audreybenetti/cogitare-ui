@@ -4,7 +4,7 @@ Esta aplicação tem com objetivo apoiar processos pós-cirúgicos perioperatór
 
 O front-end da aplicação será desenvolvido com Angular e o back-end, à princípio, será simulado pela implementação de uma API Fake, usando o JSON Server.
 
-# Deploy 
+## Deploy 
 
 https://audreybenetti.github.io/cogitare-ui/
 
